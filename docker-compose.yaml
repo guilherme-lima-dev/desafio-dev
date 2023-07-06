@@ -1,0 +1,40 @@
+version: '3.2'
+
+services:
+  primatas_php:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: primatas_php
+    tty: true
+    volumes:
+      - ./:/desafio-dev
+    restart: unless-stopped
+    links:
+      - 'db_primatas:db_primatas'
+    networks:
+      - primatas
+    ports:
+      - '9001:9001'
+  db_primatas:
+    image: 'mysql:latest'
+    container_name: db_primatas
+    command: --default-authentication-plugin=mysql_native_password
+    expose:
+      - '33060'
+    ports:
+      - '33060:33060'
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: primatas_db
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+    restart: unless-stopped
+    networks:
+      - primatas
+    volumes:
+      - .docker/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+
+networks:
+  primatas:
+    driver: bridge
