@@ -13,13 +13,12 @@ class Customer extends Model implements AuthenticatableContract, AuthorizableCon
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
-        'name', 'cpf','born_at', 'phone', 'email'
+        'name', 
+        'cpf',
+        'born_at', 
+        'phone', 
+        'email'
     ];
 
     public function purchases()

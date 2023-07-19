@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product', function (Blueprint $table) {
-            $table->id( );
+            $table->id();//remover espaços dos parentesis
             $table->string('name');
             $table->string('value');
-            $table->foreignId('product_type_Id')->constrained();
+            $table->foreignId('product_type_Id')->constrained();//todo:corrigir o no do id
             $table->timestamps();
         });
     }

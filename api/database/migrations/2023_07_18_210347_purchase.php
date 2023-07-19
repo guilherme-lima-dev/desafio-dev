@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('purchase', function (Blueprint $table) {
             $table->id();
             $table->string('nfe');
+            //TODO: add date purchase
             $table->string('cpf');
             $table->string('discount');
             $table->foreignId('customer_id')->constrained();
-            $table->timestamps();
+            $table->timestamps();//created_at, updated_at
         });
     }
 

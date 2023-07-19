@@ -19,7 +19,7 @@ class Purchase extends Model implements AuthenticatableContract, AuthorizableCon
      * @var string[]
      */
     protected $fillable = [
-        'nfe', 'discount', 'customer_id', 'data'
+        'nfe', 'discount', 'customer_id', 'data'//todo: atualizar com o parametro certo
     ];
 
     public function customer()

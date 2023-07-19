@@ -29,7 +29,8 @@ class Product extends Model implements AuthenticatableContract, AuthorizableCont
 
     public function productType()
     {
-        return $this->belongsTo(ProductType::class);
+        //todo: https://laravel.com/docs/10.x/eloquent-relationships#aggregating-related-models
+        return $this->belongsTo(ProductType::class);//indicar chave estrangeira no segundo parametro
     }
 
 }
