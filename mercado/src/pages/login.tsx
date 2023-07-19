@@ -1,8 +1,8 @@
-import FormuControl from '../components/FormControl';
+import BoxForm from '../components/login/BoxForm';
 
 export default function Login() {
   return (
-  <FormuControl/>
+  <BoxForm/>
   )
 }
 
