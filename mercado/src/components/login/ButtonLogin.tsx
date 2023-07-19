@@ -6,7 +6,7 @@ export interface IButtonProps{
 
 function ButtonLogin(  { title }: IButtonProps ) {
   return (
-    <Button variant="contained" color="primary">
+    <Button type="submit" variant="contained" color="primary">
       <Typography sx={{ color: 'white' }}>{ title }</Typography>
     </Button>
   );
