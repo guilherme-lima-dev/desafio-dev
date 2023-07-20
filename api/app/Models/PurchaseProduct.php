@@ -13,13 +13,12 @@ class PurchaseProduct extends Model implements AuthenticatableContract, Authoriz
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
-        'purchase_id', 'product_id', 'quantily', 'value', 'discount'
+       protected $fillable = [
+        'purchase_id',
+        'product_id',
+        'quantily',
+        'value',
+        'discount'
     ];
 
     public function purchase()

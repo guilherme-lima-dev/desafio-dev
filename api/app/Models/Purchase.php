@@ -13,22 +13,20 @@ class Purchase extends Model implements AuthenticatableContract, AuthorizableCon
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
-        'nfe', 'discount', 'customer_id', 'data'//todo: atualizar com o parametro certo
+        'nfe',
+        'discount',
+        'customer_id',
+        'data'//todo: atualizar com o parametro certo
     ];
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class, 'id');
     }
 
     public function purchaseProduct()
     {
-        return $this->hasMany(PurchaseProduct::class);
+        return $this->hasMany(PurchaseProduct::class, 'purchase_id');
     }
 }

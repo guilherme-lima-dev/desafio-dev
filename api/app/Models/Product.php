@@ -13,13 +13,10 @@ class Product extends Model implements AuthenticatableContract, AuthorizableCont
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
-        'name', 'value', 'product_type_id'
+        'name',
+        'value',
+        'product_type_id'
     ];
 
     public function purchaseProduct()
@@ -29,8 +26,8 @@ class Product extends Model implements AuthenticatableContract, AuthorizableCont
 
     public function productType()
     {
-        //todo: https://laravel.com/docs/10.x/eloquent-relationships#aggregating-related-models
-        return $this->belongsTo(ProductType::class);//indicar chave estrangeira no segundo parametro
+
+        return $this->belongsTo(ProductType::class);
     }
 
 }

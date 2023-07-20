@@ -13,17 +13,13 @@ class ProductType extends Model implements AuthenticatableContract, Authorizable
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
-        'name', 'tax',
+        'name',
+        'tax',
     ];
 
     public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'product_type_id');
     }
 }

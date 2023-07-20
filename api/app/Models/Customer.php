@@ -14,15 +14,15 @@ class Customer extends Model implements AuthenticatableContract, AuthorizableCon
     use Authenticatable, Authorizable, HasFactory;
 
     protected $fillable = [
-        'name', 
+        'name',
         'cpf',
-        'born_at', 
-        'phone', 
+        'born_at',
+        'phone',
         'email'
     ];
 
     public function purchases()
     {
-        return $this->hasMany(Purchase::class);
+        return $this->hasMany(Purchase::class, 'customer_id');
     }
 }
