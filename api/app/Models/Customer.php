@@ -21,7 +21,15 @@ class Customer extends Model implements AuthenticatableContract, AuthorizableCon
         'email'
     ];
 
-    public function purchases()
+    public static function find($id): Model|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder|array|null
+    {
+            $instance = new static;
+
+            return $instance->newQuery()->find($id);
+        }
+
+
+    public function purchases(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Purchase::class, 'customer_id');
     }
