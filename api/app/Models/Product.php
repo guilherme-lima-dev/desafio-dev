@@ -21,7 +21,7 @@ class Product extends Model implements AuthenticatableContract, AuthorizableCont
 
     public function purchaseProduct()
     {
-        return $this->hasMany(PurchaseProduct::class);
+        return $this->hasMany(PurchaseProduct::class, 'product_id');
     }
 
     public function productType()

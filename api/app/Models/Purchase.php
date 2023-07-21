@@ -17,7 +17,7 @@ class Purchase extends Model implements AuthenticatableContract, AuthorizableCon
         'nfe',
         'discount',
         'customer_id',
-        'data'//todo: atualizar com o parametro certo
+        'data'
     ];
 
     public function customer()
