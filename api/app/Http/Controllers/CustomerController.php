@@ -8,7 +8,7 @@ use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Database\Eloquent\Collection
     {
         return Customer::all();
     }
@@ -18,14 +18,14 @@ class CustomerController extends Controller
         return Customer::create($request->all());
     }
 
-    public function show($id)
+    public function show($id): \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder|array|null
     {
-        return Customer::findOrFail($id);
+        return Customer::find($id);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): bool|int
     {
-       $customer= Customer::findOrFail($id);
+       $customer= Customer::find($id);
        return $customer->update($request->all());
     }
 
