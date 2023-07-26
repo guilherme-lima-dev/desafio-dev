@@ -1,8 +1,6 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material'
+import { IButtonProps } from '../../Interfaces/IButtonProps'
 
-export interface IButtonProps{
-  title?: string;
-}
 
 function ButtonLogin(  { title }: IButtonProps ) {
   return (
