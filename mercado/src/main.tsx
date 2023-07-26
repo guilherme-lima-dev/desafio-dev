@@ -1,11 +1,24 @@
-import Login from './login'
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { createRoot } from 'react-dom/client'
+import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import { StrictMode } from 'react'
+import Register from './pages/register'
+import Login from './pages/login'
 
-const root = createRoot(document.getElementById("root")!);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />
+  }
+])
+
+const root = createRoot(document.getElementById("root")!)
 
 root.render(
-  <BrowserRouter>
-    <Login />
-  </BrowserRouter>
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
 );
