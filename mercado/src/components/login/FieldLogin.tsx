@@ -1,39 +1,49 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { useForm } from 'react-hook-form-mui'
+import { schema } from '../../Controller/ValidationRegister'
+import { zodResolver } from "@hookform/resolvers/zod"
+import { ZodError, z } from "zod"
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import ButtonLogin from './ButtonLogin'
-import { useForm } from 'react-hook-form-mui'
 
-type FormValues = {
-  email: string
-  password: string
-};
+type FormProps = z.infer<typeof schema>;
 
 export default function FieldLogin() {
 
-  // validation 
-  const form = useForm<FormValues>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+  const { 
+    register, 
+    handleSubmit, 
+    formState:{ errors } 
+  } = useForm<FormProps>({
+    mode: 'all',
+    reValidateMode: 'onChange',
+    resolver: zodResolver(schema)
   });
-  const { register, handleSubmit, formState } = form
 
-  const { errors } = formState
+  console.log({ errors })
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data)
+  const handleForm = (data: FormProps) => {
+    console.log({ data });
+    try {
+      const result = schema.parse(data)
+      console.log({result})
+    }catch(err){
+      if (err instanceof ZodError){
+        console.error(err.flatten());
+      }
+    }
   }
 
   return (
     <form
-    onSubmit={(event) =>
-    void handleSubmit(onSubmit)(event)}
+    onSubmit={handleSubmit(handleForm)}
     style={{
       display: 'flex',
       flexDirection: 'column',
       gap: '10px',
     }}>
-
         <TextField
           id="Email"
           type="email"
@@ -41,14 +51,8 @@ export default function FieldLogin() {
           variant="outlined"
           margin="dense"
           size="small"
-          {...register("email", {
-            required: "Insira seu email",
-            pattern: {
-              value:  /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+?$/i,
-              message: "Email invalido"
-            }
-          })}
-          error={!!errors.email}
+          {...register('email')}
+          error={!! errors.email?.message}
           helperText={errors.email?.message}
         />
 
@@ -59,15 +63,8 @@ export default function FieldLogin() {
           variant="outlined"
           margin="dense"
           size="small"
-          {...register("password", {
-            required: "Insira sua senha",
-            // Aqui vai a validação da senha
-            pattern: {
-              value:/^(?=.*[0-9])[0-9a-zA-Z$*&@#]{8,}$/,
-              message: "Senha invalida"
-            }
-          })}
-          error={!!errors.password}
+          {...register('password')}
+          error={!! errors.password?.message}
           helperText={errors.password?.message}
         />
 
