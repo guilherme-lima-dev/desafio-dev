@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { TextField } from '@mui/material'
+import ButtonLogin from '../login/ButtonLogin'
 import { useForm } from 'react-hook-form-mui'
-import { schema } from '../../Controller/ValidationRegister'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ZodError, z } from "zod"
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
-import ButtonLogin from './ButtonLogin'
+import { schema } from '../../Controller/ValidationRegister'
 
 type FormProps = z.infer<typeof schema>;
 
-export default function FieldLogin() {
-
+export default function FieldRegister() {
+  
   const { 
     register, 
     handleSubmit, 
@@ -44,6 +44,18 @@ export default function FieldLogin() {
       flexDirection: 'column',
       gap: '10px',
     }}>
+       <TextField
+          id="nome"
+          type="name"
+          label="Nome"
+          variant="outlined"
+          margin="dense"
+          size="small"
+          {...register('name')}
+          error={!! errors.name?.message}
+          helperText={errors.name?.message}
+        />
+
         <TextField
           id="Email"
           type="email"
@@ -54,6 +66,7 @@ export default function FieldLogin() {
           {...register('email')}
           error={!! errors.email?.message}
           helperText={errors.email?.message}
+
         />
 
         <TextField
@@ -67,10 +80,20 @@ export default function FieldLogin() {
           error={!! errors.password?.message}
           helperText={errors.password?.message}
         />
+        
+        <TextField
+          id="ConPass"
+          type="password"
+          label="Confirme a Senha"
+          variant="outlined"
+          margin="dense"
+          size="small"
+          {...register('confirmPassword')}
+          error={!! errors.confirmPassword?.message}
+          helperText={errors.confirmPassword?.message}
+        />
 
-        <FormControlLabel  control={<Checkbox id='remember'/>} label="Relembre-me" />
-
-        <ButtonLogin title="login" />
+        <ButtonLogin title="Registrar" />
       </form>
   )
 }
